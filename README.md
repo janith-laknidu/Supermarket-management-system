@@ -81,21 +81,8 @@ gcc *.c -o supermarket
 
 ## Main Menu Structure
 
-MAIN MENU
-│
-├── Employee
-│   ├── Product Management
-│   ├── Stock Management
-│   └── Reports
-│
-├── Customer
-│   ├── View Products
-│   ├── Search Products
-│   ├── View Prices
-│   └── Billing
-│
-└── Exit
-```
+<img width="1206" height="936" alt="WhatsApp Image 2026-05-22 at 12 32 57" src="https://github.com/user-attachments/assets/bc1d4c89-fd67-41d4-82e9-3369573203d3" />
+
 
 ---
 
