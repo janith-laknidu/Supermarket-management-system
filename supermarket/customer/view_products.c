@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<ctype.h>
-#include"view_products.h"
+#include "../employee/product_management.h"
+#include "view_products.h"
 
 static int equalsIgnoreCase(const char *left, const char *right)
 {

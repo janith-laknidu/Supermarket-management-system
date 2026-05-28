@@ -1,7 +1,7 @@
 #ifndef VIEW_PRODUCTS_H
 #define VIEW_PRODUCTS_H
 
-#include "../employee/product_management.h"
+struct Product;
 
 void viewProducts();
 void viewAllProducts();
