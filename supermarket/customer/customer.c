@@ -1,5 +1,9 @@
 #include<stdio.h>
 #include"customer.h"
+#include"view_products.h"
+#include"search_products.h"
+#include"view_pricing.h"
+#include"billing.h"
 
 void customerSection()
 {
@@ -22,19 +26,19 @@ void customerSection()
         {
             case 1:
                 printf("\nViewing products...");
-                void viewProducts();
+                viewProducts();
                 break;
             case 2:
                 printf("\nSearching products...");
-                void searchProducts();
+                searchProducts();
                 break;
             case 3:
                 printf("\nViewing prices...");
-                void viewPrices();
+                viewPrices();
                 break;
             case 4:
                 printf("\nProcessing billing...");
-                void processBilling();
+                processBilling();
                 break;
             case 5:
                 printf("\nReturning to main menu...");
