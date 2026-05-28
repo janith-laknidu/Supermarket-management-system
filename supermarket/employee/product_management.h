@@ -6,6 +6,7 @@
 struct Product {
     int id;
     char name[100];
+    char category[50];
     float price;
     int quantity;
 };
