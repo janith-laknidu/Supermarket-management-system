@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Supermarket",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "main.c",
+                "customer/customer.c",
+                "customer/billing.c",
+                "customer/search_products.c",
+                "customer/view_products.c",
+                "customer/view_pricing.c",
+                "employee/employee.c",
+                "employee/product_management.c",
+                "employee/reports.c",
+                "employee/stock_management.c",
+                "-o",
+                "supermarket.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
