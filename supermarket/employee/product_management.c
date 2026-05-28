@@ -47,11 +47,19 @@ struct Product products[MAX_PRODUCTS];
 int count = 0;
 
 void addProduct() {
+    if(count >= MAX_PRODUCTS) {
+        printf("\nProduct list is full!\n");
+        return;
+    }
+
     printf("\nEnter Product ID: ");
     scanf("%d", &products[count].id);
 
     printf("Enter Product Name: ");
     scanf(" %99[^\n]", products[count].name);
+
+    printf("Enter Product Category: ");
+    scanf(" %49[^\n]", products[count].category);
 
     printf("Enter Product Price: ");
     scanf("%f", &products[count].price);
@@ -75,6 +83,7 @@ void viewproducts(){
         
         printf("ID: %d\n", products[i].id);
         printf("Name: %s\n", products[i].name);
+        printf("Category: %s\n", products[i].category);
         printf("Price: %.2f\n", products[i].price);
         printf("Quantity: %d\n", products[i].quantity);
     }
@@ -97,6 +106,7 @@ void searchProduct()
 
             printf("ID: %d\n", products[i].id);
             printf("Name: %s\n", products[i].name);
+            printf("Category: %s\n", products[i].category);
             printf("Price: %.2f\n", products[i].price);
             printf("Quantity: %d\n", products[i].quantity);
 
