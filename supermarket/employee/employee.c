@@ -32,7 +32,7 @@ void employeeSection()
                 break;
             case 3:
                 printf("\nThis is the reports section...");
-                reports();
+                reportsMenu();
                 break;
             case 4:
                 printf("\nReturning to the main menu...");
