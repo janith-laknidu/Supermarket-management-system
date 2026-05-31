@@ -4,6 +4,8 @@
 void stockManagement()
 {
     int choice;
+
+    ensureProductCatalog();
     
     do {
         printf("\n");
@@ -50,6 +52,8 @@ void addStock() {
     int i;
     int found = 0;
 
+    ensureProductCatalog();
+
     printf("Enter Product ID to add stock: ");
     scanf("%d", &id);
 
@@ -64,6 +68,7 @@ void addStock() {
 
             printf("Stock updated successfully! \n");
             printf("New Quantity: %d\n", products[i].quantity);
+            printProductsTable(0);
             found = 1;
             break;
         }
@@ -74,22 +79,10 @@ void addStock() {
     }
 }
 void viewStock() {
-    int i;
-
-    if(count == 0) {
-        printf("\nNo products available.\n");
-        return;
-    }
+    ensureProductCatalog();
 
     printf("\n======= STOCK DETAILS =======\n");
-
-    for(i=0;i<count;i++) {
-        printf("\nProduct %d:\n", i+1);
-
-        printf("ID: %d\n", products[i].id);
-        printf("Name: %s\n", products[i].name);
-        printf("Quantity: %d\n", products[i].quantity);
-    }   
+    printProductsTable(0);
     
 }
 void updateStock() {
@@ -97,6 +90,8 @@ void updateStock() {
     int newQty;
     int i;
     int found = 0;
+
+    ensureProductCatalog();
 
     printf("Enter Product ID to update stock: ");
     scanf("%d", &id);
@@ -112,6 +107,7 @@ void updateStock() {
 
             printf("Stock updated successfully! \n");
             printf("New Quantity: %d\n", products[i].quantity);
+            printProductsTable(0);
             found = 1;
             break;
         }
@@ -124,6 +120,8 @@ void updateStock() {
 void lowStockAlert() {
     int i;
     int found = 0;
+
+    ensureProductCatalog();
 
     printf("\n======= LOW STOCK ALERT =======\n");
 
@@ -148,6 +146,8 @@ void removeDamagedStock() {
     int i;
     int found = 0;
 
+    ensureProductCatalog();
+
     printf("Enter Product ID to remove damaged stock: ");
     scanf("%d", &id);
 
@@ -167,6 +167,7 @@ void removeDamagedStock() {
 
             printf("Damaged stock removed successfully! \n");
             printf("Remaining Quantity: %d\n", products[i].quantity);
+            printProductsTable(0);
             found = 1;
             break;
         }
