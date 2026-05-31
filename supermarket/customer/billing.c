@@ -1,18 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include "billing.h"
+#include "../employee/product_management.h"
 
-#define MAX_PRODUCTS 100
 #define NAME_LEN 50
 #define MAX_CART 50
 
-/* ── Product Structure ── */
-typedef struct {
-    int id;
-    char name[NAME_LEN];
-    char category[30];
-    float price;
-    int quantity;
-} Product;
+/* keep `Product` typedef name for compatibility */
+typedef struct Product Product;
 
 /* ── CartItem Structure ── */
 typedef struct {
@@ -23,9 +18,7 @@ typedef struct {
     float subtotal;
 } CartItem;
 
-/* ── Global Variables ── */
-Product products[MAX_PRODUCTS];
-int count = 0;
+/* products[] and count are defined in product_management.c */
 
 /* ── Bill state ── */
 static CartItem bill[MAX_CART];
@@ -320,15 +313,7 @@ void billingMenu() {
     } while (choice != 0);
 }
 
-/* ── MAIN FUNCTION ── */
-int main() {
-    products[0] = (Product){101, "Keeri Samba 5kg", "Grocery", 1250.00, 20};
-    products[1] = (Product){102, "Anchor Milk Powder", "Dairy", 1100.00, 15};
-    products[2] = (Product){103, "Munchee Super Cream Cracker", "Biscuits", 250.00, 50};
-    products[3] = (Product){104, "Signal Toothpaste", "Personal Care", 180.00, 5};
-    count = 4;
-
-    printf("--- Supermarket Billing System Test ---\n");
+/* wrapper expected by customer.c */
+void processBilling() {
     billingMenu();
-    return 0;
 }
