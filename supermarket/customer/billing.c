@@ -35,6 +35,8 @@ static int findById(int id) {
 
 /* ── 1. addItemToBill() ── */
 void addItemToBill() {
+    ensureProductCatalog();
+
     if (billSize >= MAX_CART) {
         printf("\n  [!] Bill is full. Please complete checkout first.\n");
         return;
@@ -123,6 +125,7 @@ void addItemToBill() {
     products[idx].quantity -= qty;
     billSize++;
     printf("\n  [OK] '%s' x%d added to bill. (Rs. %.2f)\n", products[idx].name, qty, products[idx].price * qty);
+    printProductsTable(1);
 }
 
 /* ── 2. viewBill() ── */
@@ -247,6 +250,8 @@ void printReceipt() {
 
 /* ── 5. clearBill() ── */
 void clearBill() {
+    ensureProductCatalog();
+
     if (billSize == 0) {
         printf("\n  Bill is already empty.\n");
         return;
@@ -271,6 +276,7 @@ void clearBill() {
 
     billSize  = 0;
     billTotal = 0.0f;
+    printProductsTable(1);
 }
 
 /* ── Billing Sub-Menu ── */
