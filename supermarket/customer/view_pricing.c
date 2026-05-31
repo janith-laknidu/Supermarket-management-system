@@ -1,17 +1,15 @@
-#include<stdio.h>
-#include"view_pricing.h"
-void viewPrices()
-{
-    printf("\nDisplaying product prices...");
-    // You can add code here to display the prices of products
-}
 #include <stdio.h>
 #include <string.h>
+#include "view_pricing.h"
+#include "../employee/product_management.h"
 
-#define MAX_PRODUCTS 100
+/* forward declaration so wrapper can call it */
+void viewPricesMenu();
 
-extern struct Product products[MAX_PRODUCTS];
-extern int count;
+/* wrapper expected by customer.c */
+void viewPrices() {
+    viewPricesMenu();
+}
 
 /* Function Prototypes */
 
@@ -99,7 +97,7 @@ void viewAllPrices()
     for(i = 0; i < count; i++)
     {
         printf("%-10d %-20s %.2f\n",
-               products[i].productID,
+               products[i].id,
                products[i].name,
                products[i].price);
     }
@@ -129,8 +127,8 @@ void highestPrice()
     printf("      HIGHEST PRICE PRODUCT\n");
     printf("=================================\n");
 
-    printf("ID      : %d\n",
-           products[maxIndex].productID);
+        printf("ID      : %d\n",
+            products[maxIndex].id);
 
     printf("Name    : %s\n",
            products[maxIndex].name);
@@ -163,8 +161,8 @@ void lowestPrice()
     printf("       LOWEST PRICE PRODUCT\n");
     printf("=================================\n");
 
-    printf("ID      : %d\n",
-           products[minIndex].productID);
+        printf("ID      : %d\n",
+            products[minIndex].id);
 
     printf("Name    : %s\n",
            products[minIndex].name);
@@ -203,7 +201,7 @@ void discountPrices()
             (products[i].price * 0.10);
 
         printf("%-10d %-20s %-15.2f %-15.2f\n",
-               products[i].productID,
+               products[i].id,
                products[i].name,
                products[i].price,
                discountedPrice);
@@ -260,7 +258,7 @@ void sortPrices()
     for(i = 0; i < count; i++)
     {
         printf("%-10d %-20s %.2f\n",
-               tempProducts[i].productID,
+               tempProducts[i].id,
                tempProducts[i].name,
                tempProducts[i].price);
     }
