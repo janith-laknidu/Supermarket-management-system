@@ -1,13 +1,7 @@
-#include<stdio.h>
-#include"search_products.h"
-void searchProducts()
-{
-    printf("\n----------------------------------------------");
-    printf("\nSEARCH PRODUCTS");
-}
 #include <stdio.h>
 #include <string.h>
 #include "search_products.h"
+#include "../employee/product_management.h"
 
 // GLOBAL ARRAY
 extern struct Product products[MAX_PRODUCTS];
@@ -89,7 +83,7 @@ void searchByID()
             printf("Name: %s\n", products[i].name);
             printf("Category: %s\n", products[i].category);
             printf("Price: %.2f\n", products[i].price);
-            printf("Stock: %d\n", products[i].stock);
+            printf("Quantity: %d\n", products[i].quantity);
 
             found = 1;
         }
@@ -118,7 +112,7 @@ void searchByName()
             printf("Name: %s\n", products[i].name);
             printf("Category: %s\n", products[i].category);
             printf("Price: %.2f\n", products[i].price);
-            printf("Stock: %d\n", products[i].stock);
+            printf("Quantity: %d\n", products[i].quantity);
 
             found = 1;
         }
@@ -145,7 +139,7 @@ void searchByCategory()
             printf("\nID: %d", products[i].id);
             printf("\nName: %s", products[i].name);
             printf("\nPrice: %.2f", products[i].price);
-            printf("\nStock: %d\n", products[i].stock);
+            printf("\nQuantity: %d\n", products[i].quantity);
 
             found = 1;
         }
@@ -172,7 +166,7 @@ void searchByPrice()
             printf("\nID: %d", products[i].id);
             printf("\nName: %s", products[i].name);
             printf("\nCategory: %s", products[i].category);
-            printf("\nStock: %d\n", products[i].stock);
+            printf("\nQuantity: %d\n", products[i].quantity);
 
             found = 1;
         }
@@ -192,13 +186,13 @@ void searchAvailableProducts()
 
     for(int i = 0; i < count; i++)
     {
-        if(products[i].stock > 0)
+        if(products[i].quantity > 0)
         {
             printf("\nID: %d", products[i].id);
             printf("\nName: %s", products[i].name);
             printf("\nCategory: %s", products[i].category);
             printf("\nPrice: %.2f", products[i].price);
-            printf("\nStock: %d\n", products[i].stock);
+            printf("\nQuantity: %d\n", products[i].quantity);
 
             found = 1;
         }
