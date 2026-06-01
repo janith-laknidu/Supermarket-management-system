@@ -71,9 +71,9 @@ void viewAllPrices()
 {
     int i;
 
-    printf("\n===============================================\n");
+    printf("\n");
     printf("               PRODUCT PRICES\n");
-    printf("===============================================\n");
+    printf("\n");
 
     if(count == 0)
     {
@@ -113,9 +113,9 @@ void highestPrice()
         }
     }
 
-    printf("\n=================================\n");
+    printf("\n");
     printf("      HIGHEST PRICE PRODUCT\n");
-    printf("=================================\n");
+    printf("\n");
 
         printf("ID      : %d\n",
             products[maxIndex].id);
@@ -145,9 +145,9 @@ void lowestPrice()
         }
     }
 
-    printf("\n=================================\n");
+    printf("\n");
     printf("       LOWEST PRICE PRODUCT\n");
-    printf("=================================\n");
+    printf("\n");
 
         printf("ID      : %d\n",
             products[minIndex].id);
@@ -170,9 +170,9 @@ void discountPrices()
         return;
     }
 
-    printf("\n========================================================\n");
+    printf("\n");
     printf("              PRODUCTS WITH 10%% DISCOUNT\n");
-    printf("========================================================\n");
+    printf("\n");
 
     printf("%-10s %-20s %-15s %-15s\n",
            "ID",
@@ -227,9 +227,9 @@ void sortPrices()
         }
     }
 
-    printf("\n=================================================\n");
+    printf("\n");
     printf("         PRODUCTS SORTED BY PRICE\n");
-    printf("=================================================\n");
+    printf("\n");
 
     printf("%-10s %-20s %-10s\n",
            "ID",
