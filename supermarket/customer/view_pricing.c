@@ -3,15 +3,11 @@
 #include "view_pricing.h"
 #include "../employee/product_management.h"
 
-/* forward declaration so wrapper can call it */
 void viewPricesMenu();
 
-/* wrapper expected by customer.c */
 void viewPrices() {
     viewPricesMenu();
 }
-
-/* Function Prototypes */
 
 void viewAllPrices();
 void highestPrice();
@@ -19,8 +15,6 @@ void lowestPrice();
 void discountPrices();
 void sortPrices();
 void viewPricesMenu();
-
-/* Main Price Menu */
 
 void viewPricesMenu()
 {
@@ -73,8 +67,6 @@ void viewPricesMenu()
     } while(choice != 6);
 }
 
-/* 1. View All Prices */
-
 void viewAllPrices()
 {
     int i;
@@ -102,8 +94,6 @@ void viewAllPrices()
                products[i].price);
     }
 }
-
-/* 2. Highest Price */
 
 void highestPrice()
 {
@@ -137,8 +127,6 @@ void highestPrice()
            products[maxIndex].price);
 }
 
-/* 3. Lowest Price */
-
 void lowestPrice()
 {
     int i, minIndex = 0;
@@ -170,8 +158,6 @@ void lowestPrice()
     printf("Price   : %.2f\n",
            products[minIndex].price);
 }
-
-/* 4. Discount Prices */
 
 void discountPrices()
 {
@@ -208,7 +194,6 @@ void discountPrices()
     }
 }
 
-/* 5. Sort Prices */
 
 void sortPrices()
 {
@@ -223,14 +208,10 @@ void sortPrices()
         return;
     }
 
-    /* Copy Original Array */
-
     for(i = 0; i < count; i++)
     {
         tempProducts[i] = products[i];
     }
-
-    /* Bubble Sort */
 
     for(i = 0; i < count - 1; i++)
     {
