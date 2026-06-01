@@ -22,9 +22,9 @@ void viewPricesMenu()
 
     do
     {
-        printf("\n=================================\n");
+        printf("\n");
         printf("         VIEW PRICES MENU\n");
-        printf("=================================\n");
+        printf("\n");
         printf("1. View All Prices\n");
         printf("2. Highest Price Product\n");
         printf("3. Lowest Price Product\n");
