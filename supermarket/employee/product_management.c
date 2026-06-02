@@ -2,87 +2,8 @@
 #include<string.h>
 #include"product_management.h"
 
-static int catalogSeeded = 0;
-
-void ensureProductCatalog()
-{
-    if(catalogSeeded == 0 && count == 0) {
-        products[0].id = 101;
-        strcpy(products[0].name, "Milk");
-        strcpy(products[0].category, "Dairy");
-        products[0].price = 120.00f;
-        products[0].quantity = 25;
-
-        products[1].id = 102;
-        strcpy(products[1].name, "Bread");
-        strcpy(products[1].category, "Bakery");
-        products[1].price = 45.00f;
-        products[1].quantity = 30;
-
-        products[2].id = 103;
-        strcpy(products[2].name, "Rice");
-        strcpy(products[2].category, "Groceries");
-        products[2].price = 250.00f;
-        products[2].quantity = 40;
-
-        products[3].id = 104;
-        strcpy(products[3].name, "Soap");
-        strcpy(products[3].category, "Personal Care");
-        products[3].price = 80.00f;
-        products[3].quantity = 18;
-
-        products[4].id = 105;
-        strcpy(products[4].name, "Tea");
-        strcpy(products[4].category, "Beverages");
-        products[4].price = 150.00f;
-        products[4].quantity = 22;
-
-        count = 5;
-        catalogSeeded = 1;
-    }
-}
-
-void printProductsTable(int availableOnly)
-{
-    int i;
-    int rowsPrinted = 0;
-
-    ensureProductCatalog();
-
-    if(count == 0) {
-        printf("\nNo products available!\n");
-        return;
-    }
-
-    printf("\n--------------------------------------------------------------------------------\n");
-    printf("%-6s %-22s %-18s %-10s %-10s %-14s\n", "ID", "Name", "Category", "Price", "Qty", "Status");
-    printf("--------------------------------------------------------------------------------\n");
-
-    for(i = 0; i < count; i++) {
-        if(availableOnly && products[i].quantity <= 0) {
-            continue;
-        }
-
-        printf("%-6d %-22s %-18s %-10.2f %-10d %-14s\n",
-               products[i].id,
-               products[i].name,
-               products[i].category,
-               products[i].price,
-               products[i].quantity,
-               products[i].quantity > 0 ? "Available" : "Out of Stock");
-        rowsPrinted = 1;
-    }
-
-    if(rowsPrinted == 0) {
-        printf("%-6s %-22s %-18s %-10s %-10s %-14s\n", "-", "-", "-", "-", "-", "No rows");
-    }
-
-    printf("--------------------------------------------------------------------------------\n");
-}
-
 void productManagement()
 {
-    ensureProductCatalog();
     printf("\nWelcome to the Product Management Section!");
     int choice;
     do {
@@ -122,11 +43,18 @@ void productManagement()
     // You can add more functionality here as needed
 }
 
-struct Product products[MAX_PRODUCTS];
-int count = 0;
+struct Product products[MAX_PRODUCTS] =
+{
+    {101, "Rice White kekulu 1kg", "Grocery", 250.00, 50},
+    {102, "White Sugar 1kg", "Grocery", 280.00, 40},
+    {103, "Milk Powder", "Dairy", 1200.00, 25},
+    {104, "Soap", "Personal Care", 180.00, 100},
+    {105, "Shampoo", "Personal Care", 650.00, 30}
+};
+
+int count = 5;
 
 void addProduct() {
-    ensureProductCatalog();
     if(count >= MAX_PRODUCTS) {
         printf("\nProduct list is full!\n");
         return;
@@ -149,18 +77,24 @@ void addProduct() {
 
     count++;
     printf("\nProduct added successfully!\n");
-    printProductsTable(0);
     }
 void viewproducts(){
 
     int i;
-    ensureProductCatalog();
     if(count == 0) {
         printf("\nNo products available!\n");
         return;
     }
     printf("\n--- Product List ---\n");
-    printProductsTable(0);
+    for(i = 0; i < count; i++) {
+        printf("\nProduct %d:\n", i + 1);
+        
+        printf("ID: %d\n", products[i].id);
+        printf("Name: %s\n", products[i].name);
+        printf("Category: %s\n", products[i].category);
+        printf("Price: %.2f\n", products[i].price);
+        printf("Quantity: %d\n", products[i].quantity);
+    }
 
 }
 void searchProduct()
@@ -168,8 +102,6 @@ void searchProduct()
     int id;
     int i;
     int found = 0;
-
-    ensureProductCatalog();
 
     printf("\nEnter Product ID to Search: ");
     scanf("%d", &id);
@@ -202,8 +134,6 @@ void updateProduct()
     int i;
     int found = 0;
 
-    ensureProductCatalog();
-
     printf("\nEnter Product ID to Update: ");
     scanf("%d", &id);
 
@@ -220,7 +150,6 @@ void updateProduct()
             printf("Enter New Quantity: ");
             scanf("%d", &products[i].quantity);
                 printf("\nProduct Updated Successfully!\n");
-            printProductsTable(0);
 
             found = 1;
             break;
@@ -239,8 +168,6 @@ void deleteProduct()
     int j;
     int found = 0;
 
-    ensureProductCatalog();
-
     printf("\nEnter Product ID to Delete: ");
     scanf("%d", &id);
 
@@ -257,7 +184,6 @@ void deleteProduct()
 
             printf("\nProduct Deleted Successfully!\n");
                      found = 1;
-            printProductsTable(0);
             break;
         }
     }
