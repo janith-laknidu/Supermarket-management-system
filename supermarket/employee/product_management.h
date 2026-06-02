@@ -14,8 +14,6 @@ struct Product {
 extern struct Product products[MAX_PRODUCTS];
 extern int count;
 
-void ensureProductCatalog();
-void printProductsTable(int availableOnly);
 void productManagement();
 
 void addProduct();
