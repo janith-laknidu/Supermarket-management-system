@@ -34,11 +34,11 @@ void customerSection()
                 break;
             case 3:
                 printf("\nViewing prices...");
-                viewPrices();
+                viewPricesMenu();
                 break;
             case 4:
                 printf("\nProcessing billing...");
-                processBilling();
+                billingMenu();
                 break;
             case 5:
                 printf("\nReturning to main menu...");
