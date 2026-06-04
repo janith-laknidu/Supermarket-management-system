@@ -5,38 +5,11 @@
 #include"stock_management.h"
 #include"reports.h"
 
-#define EMPLOYEE_PASSWORD "1234"
-
-static int verifyEmployeePassword()
-{
-    char enteredPassword[32];
-    int attempts;
-
-    for(attempts = 0; attempts < 3; attempts++) {
-        printf("\nEnter employee password: ");
-        scanf(" %31s", enteredPassword);
-
-        if(strcmp(enteredPassword, EMPLOYEE_PASSWORD) == 0) {
-            return 1;
-        }
-
-        printf("Incorrect password. ");
-        if(attempts < 2) {
-            printf("Please try again.\n");
-        }
-    }
-
-    printf("\nAccess denied. Returning to main menu...\n");
-    return 0;
-}
 
 void employeeSection()
 {
     int choice;
 
-    if(verifyEmployeePassword() == 0) {
-        return;
-    }
 
     do{
         printf("\n==============================================");
