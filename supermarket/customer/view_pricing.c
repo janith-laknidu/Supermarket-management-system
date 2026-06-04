@@ -8,8 +8,6 @@
 extern struct Product products[MAX_PRODUCTS];
 extern int count;
 
-/* Main Price Menu */
-
 void viewPricesMenu()
 {
     int choice;
@@ -61,7 +59,6 @@ void viewPricesMenu()
     } while(choice != 6);
 }
 
-/* 1. View All Prices */
 
 void viewAllPrices()
 {
@@ -91,7 +88,6 @@ void viewAllPrices()
     }
 }
 
-/* 2. Highest Price */
 
 void highestPrice()
 {
@@ -125,8 +121,6 @@ void highestPrice()
            products[maxIndex].price);
 }
 
-/* 3. Lowest Price */
-
 void lowestPrice()
 {
     int i, minIndex = 0;
@@ -159,7 +153,6 @@ void lowestPrice()
            products[minIndex].price);
 }
 
-/* 4. Discount Prices */
 
 void discountPrices()
 {
@@ -196,7 +189,6 @@ void discountPrices()
     }
 }
 
-/* 5. Sort Prices */
 
 void sortPrices()
 {
@@ -211,14 +203,11 @@ void sortPrices()
         return;
     }
 
-    /* Copy Original Array */
 
     for(i = 0; i < count; i++)
     {
         tempProducts[i] = products[i];
     }
-
-    /* Bubble Sort */
 
     for(i = 0; i < count - 1; i++)
     {
