@@ -63,6 +63,13 @@ void addProduct() {
     printf("\nEnter Product ID: ");
     scanf("%d", &products[count].id);
 
+       for (int i = 0; i < count; i++) {
+        if(products[i].id == products[count].id) {
+            printf("\nProduct ID already exists! Please try again.\n");
+            return;
+        }
+    }
+
     printf("Enter Product Name: ");
     scanf(" %99[^\n]", products[count].name);
 
