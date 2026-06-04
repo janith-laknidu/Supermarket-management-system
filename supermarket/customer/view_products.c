@@ -30,8 +30,6 @@ void viewProducts()
 {
     int choice;
 
-    ensureProductCatalog();
-
     do {
         printf("\n----------------------------------------------");
         printf("\nVIEW PRODUCTS");
@@ -73,14 +71,42 @@ void viewProducts()
 
 void viewAllProducts()
 {
+    int i;
+
+    if(count == 0) {
+        printf("\nNo products available!\n");
+        return;
+    }
+
     printf("\n--- All Products ---\n");
-    printProductsTable(0);
+    for(i = 0; i < count; i++) {
+        printf("\nProduct %d:\n", i + 1);
+        printProductDetails(&products[i]);
+    }
 }
 
 void viewAvailableProducts()
 {
+    int i;
+    int found = 0;
+
+    if(count == 0) {
+        printf("\nNo products available!\n");
+        return;
+    }
+
     printf("\n--- Available Products ---\n");
-    printProductsTable(1);
+    for(i = 0; i < count; i++) {
+        if(products[i].quantity > 0) {
+            printf("\nProduct %d:\n", i + 1);
+            printProductDetails(&products[i]);
+            found = 1;
+        }
+    }
+
+    if(found == 0) {
+        printf("\nNo available products found!\n");
+    }
 }
 
 void viewCategoryProducts()
@@ -88,8 +114,6 @@ void viewCategoryProducts()
     char category[50];
     int i;
     int found = 0;
-
-    ensureProductCatalog();
 
     if(count == 0) {
         printf("\nNo products available!\n");
@@ -118,8 +142,6 @@ void viewNewProducts()
     int i;
     int startIndex;
 
-    ensureProductCatalog();
-
     if(count == 0) {
         printf("\nNo products available!\n");
         return;
@@ -139,8 +161,6 @@ void viewProductDetails()
     int id;
     int i;
     int found = 0;
-
-    ensureProductCatalog();
 
     if(count == 0) {
         printf("\nNo products available!\n");
