@@ -38,8 +38,8 @@ static int equalsIgnoreCase(const char *left, const char *right)
 /*
  * printProductDetails
  * -------------------
- * Nicely prints all fields of a single `struct Product` to stdout.
- * This centralizes display logic so other view functions can reuse it
+ * prints all fields of a single `struct Product` to stdout.
+ * centralizes display logic so other view functions can reuse it
  * and ensures a consistent product representation across the UI.
  */
 static void printProductDetails(const struct Product *product)
