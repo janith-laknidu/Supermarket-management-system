@@ -3,6 +3,25 @@
 #include "../employee/product_management.h"
 #include "view_products.h"
 
+/*
+ * Module: view_products.c
+ * -----------------------
+ * Provides a set of functions for displaying products to customers.
+ * Most functions read from the `products` array and `count` defined
+ * in `product_management.h`. The functions below include utility
+ * helpers (case-insensitive string compare and pretty-printer) and
+ * various view modes (all products, available only, by category,
+ * newest items, and lookup by ID).
+ */
+
+/*
+ * equalsIgnoreCase
+ * -----------------
+ * Perform a case-insensitive comparison of two NUL-terminated strings.
+ * Uses `tolower` on unsigned char values to avoid undefined behavior
+ * on platforms where `char` is signed. Returns 1 when strings are
+ * equal (ignoring case), otherwise 0.
+ */
 static int equalsIgnoreCase(const char *left, const char *right)
 {
     while(*left != '\0' && *right != '\0') {
@@ -16,6 +35,13 @@ static int equalsIgnoreCase(const char *left, const char *right)
     return *left == '\0' && *right == '\0';
 }
 
+/*
+ * printProductDetails
+ * -------------------
+ * Nicely prints all fields of a single `struct Product` to stdout.
+ * This centralizes display logic so other view functions can reuse it
+ * and ensures a consistent product representation across the UI.
+ */
 static void printProductDetails(const struct Product *product)
 {
     printf("\nID: %d\n", product->id);
@@ -41,6 +67,11 @@ void viewProducts()
         printf("\n5. View Product Details");
         printf("\n6. Back");
 
+/*
+    * Menu loop: prompt the user for a choice, then dispatch using
+    * a switch statement. Uses `scanf` to read an integer choice.
+    * The loop continues until the user selects the "Back" option.
+    */
         printf("\n\nEnter your choice: ");
         scanf("%d", &choice);
 
@@ -69,6 +100,13 @@ void viewProducts()
     } while(choice != 6);
 }
 
+/*
+ * viewAllProducts
+ * ----------------
+ * Iterates over every product in the global `products` array and
+ * prints details using `printProductDetails`. Checks `count` first
+ * to avoid iterating an empty list.
+ */
 void viewAllProducts()
 {
     int i;
@@ -85,6 +123,13 @@ void viewAllProducts()
     }
 }
 
+/*
+ * viewAvailableProducts
+ * ---------------------
+ * Filters products by `quantity > 0` to show only in-stock items.
+ * Uses a `found` flag to detect when no matching products were found
+ * and informs the user accordingly.
+ */
 void viewAvailableProducts()
 {
     int i;
@@ -109,6 +154,13 @@ void viewAvailableProducts()
     }
 }
 
+/*
+ * viewCategoryProducts
+ * --------------------
+ * Allows customers to view products that belong to a specific
+ * category. Uses `equalsIgnoreCase` to compare categories without
+ * considering letter case differences.
+ */
 void viewCategoryProducts()
 {
     char category[50];
@@ -120,6 +172,11 @@ void viewCategoryProducts()
         return;
     }
 
+    /*
+     * Read a category string (up to 49 chars) and print all products
+     * whose `category` matches case-insensitively. `scanf(" %49[^\n]")`
+     * prevents buffer overflow by limiting the number of characters read.
+     */
     printf("\nEnter category to view: ");
     scanf(" %49[^\n]", category);
 
@@ -137,6 +194,12 @@ void viewCategoryProducts()
     }
 }
 
+/*
+ * viewNewProducts
+ * ----------------
+ * Shows the most recent up to 5 products added to the list by
+ * starting from `count - 5` (or 0 if there are fewer than 5).
+ */
 void viewNewProducts()
 {
     int i;
@@ -156,6 +219,14 @@ void viewNewProducts()
     }
 }
 
+/*
+ * viewProductDetails
+ * ------------------
+ * Prompts the user for a numeric product ID and performs a linear
+ * search through the `products` array to find a product with the
+ * matching `id`. If found, prints the product; otherwise informs
+ * the user that the product was not found.
+ */
 void viewProductDetails()
 {
     int id;
