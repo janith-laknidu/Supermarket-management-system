@@ -1,14 +1,35 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <string.h>
-#include"view_pricing.h"
+#include "view_pricing.h"
 #include "../employee/product_management.h"
 
 #define MAX_PRODUCTS 100
 
+struct PriceProduct
+{
+    int id;
+    char name[100];
+    float price;
+};
+
 extern struct Product products[MAX_PRODUCTS];
 extern int count;
 
-/* Main Price Menu */
+/* Copy Data from Product Structure */
+
+void loadPriceProducts(struct PriceProduct priceProducts[])
+{
+    int i;
+
+    for(i = 0; i < count; i++)
+    {
+        priceProducts[i].id = products[i].id;
+        strcpy(priceProducts[i].name, products[i].name);
+        priceProducts[i].price = products[i].price;
+    }
+}
+
+/* Main Menu */
 
 void viewPricesMenu()
 {
@@ -61,21 +82,24 @@ void viewPricesMenu()
     } while(choice != 6);
 }
 
-/* 1. View All Prices */
+/* View All Prices */
 
 void viewAllPrices()
 {
     int i;
-
-    printf("\n===============================================\n");
-    printf("               PRODUCT PRICES\n");
-    printf("===============================================\n");
+    struct PriceProduct priceProducts[MAX_PRODUCTS];
 
     if(count == 0)
     {
-        printf("No Products Available!\n");
+        printf("\nNo Products Available!\n");
         return;
     }
+
+    loadPriceProducts(priceProducts);
+
+    printf("\n=================================================\n");
+    printf("                PRODUCT PRICES\n");
+    printf("=================================================\n");
 
     printf("%-10s %-25s %-10s\n",
            "ID",
@@ -85,27 +109,31 @@ void viewAllPrices()
     for(i = 0; i < count; i++)
     {
         printf("%-10d %-25s %.2f\n",
-               products[i].id,
-               products[i].name,
-               products[i].price);
+               priceProducts[i].id,
+               priceProducts[i].name,
+               priceProducts[i].price);
     }
 }
 
-/* 2. Highest Price */
+/* Highest Price Product */
 
 void highestPrice()
 {
     int i, maxIndex = 0;
+    struct PriceProduct priceProducts[MAX_PRODUCTS];
 
     if(count == 0)
     {
-        printf("No Products Available!\n");
+        printf("\nNo Products Available!\n");
         return;
     }
 
+    loadPriceProducts(priceProducts);
+
     for(i = 1; i < count; i++)
     {
-        if(products[i].price > products[maxIndex].price)
+        if(priceProducts[i].price >
+           priceProducts[maxIndex].price)
         {
             maxIndex = i;
         }
@@ -115,31 +143,30 @@ void highestPrice()
     printf("      HIGHEST PRICE PRODUCT\n");
     printf("=================================\n");
 
-    printf("ID      : %d\n",
-           products[maxIndex].id);
-
-    printf("Name    : %s\n",
-           products[maxIndex].name);
-
-    printf("Price   : %.2f\n",
-           products[maxIndex].price);
+    printf("ID    : %d\n", priceProducts[maxIndex].id);
+    printf("Name  : %s\n", priceProducts[maxIndex].name);
+    printf("Price : %.2f\n", priceProducts[maxIndex].price);
 }
 
-/* 3. Lowest Price */
+/* Lowest Price Product */
 
 void lowestPrice()
 {
     int i, minIndex = 0;
+    struct PriceProduct priceProducts[MAX_PRODUCTS];
 
     if(count == 0)
     {
-        printf("No Products Available!\n");
+        printf("\nNo Products Available!\n");
         return;
     }
 
+    loadPriceProducts(priceProducts);
+
     for(i = 1; i < count; i++)
     {
-        if(products[i].price < products[minIndex].price)
+        if(priceProducts[i].price <
+           priceProducts[minIndex].price)
         {
             minIndex = i;
         }
@@ -149,32 +176,30 @@ void lowestPrice()
     printf("       LOWEST PRICE PRODUCT\n");
     printf("=================================\n");
 
-    printf("ID      : %d\n",
-           products[minIndex].id);
-
-    printf("Name    : %s\n",
-           products[minIndex].name);
-
-    printf("Price   : %.2f\n",
-           products[minIndex].price);
+    printf("ID    : %d\n", priceProducts[minIndex].id);
+    printf("Name  : %s\n", priceProducts[minIndex].name);
+    printf("Price : %.2f\n", priceProducts[minIndex].price);
 }
 
-/* 4. Discount Prices */
+/* Discount Prices */
 
 void discountPrices()
 {
     int i;
     float discountedPrice;
+    struct PriceProduct priceProducts[MAX_PRODUCTS];
 
     if(count == 0)
     {
-        printf("No Products Available!\n");
+        printf("\nNo Products Available!\n");
         return;
     }
 
-    printf("\n========================================================\n");
-    printf("              PRODUCTS WITH 10%% DISCOUNT\n");
-    printf("========================================================\n");
+    loadPriceProducts(priceProducts);
+
+    printf("\n============================================================\n");
+    printf("                PRODUCTS WITH 10%% DISCOUNT\n");
+    printf("============================================================\n");
 
     printf("%-10s %-25s %-15s %-15s\n",
            "ID",
@@ -185,40 +210,32 @@ void discountPrices()
     for(i = 0; i < count; i++)
     {
         discountedPrice =
-            products[i].price -
-            (products[i].price * 0.10);
+            priceProducts[i].price -
+            (priceProducts[i].price * 0.10f);
 
         printf("%-10d %-25s %-15.2f %-15.2f\n",
-               products[i].id,
-               products[i].name,
-               products[i].price,
+               priceProducts[i].id,
+               priceProducts[i].name,
+               priceProducts[i].price,
                discountedPrice);
     }
 }
 
-/* 5. Sort Prices */
+/* Sort Prices */
 
 void sortPrices()
 {
     int i, j;
-
-    struct Product tempProducts[MAX_PRODUCTS];
-    struct Product temp;
+    struct PriceProduct tempProducts[MAX_PRODUCTS];
+    struct PriceProduct temp;
 
     if(count == 0)
     {
-        printf("No Products Available!\n");
+        printf("\nNo Products Available!\n");
         return;
     }
 
-    /* Copy Original Array */
-
-    for(i = 0; i < count; i++)
-    {
-        tempProducts[i] = products[i];
-    }
-
-    /* Bubble Sort */
+    loadPriceProducts(tempProducts);
 
     for(i = 0; i < count - 1; i++)
     {
@@ -235,7 +252,7 @@ void sortPrices()
     }
 
     printf("\n=================================================\n");
-    printf("         PRODUCTS SORTED BY PRICE\n");
+    printf("          PRODUCTS SORTED BY PRICE\n");
     printf("=================================================\n");
 
     printf("%-10s %-25s %-10s\n",
