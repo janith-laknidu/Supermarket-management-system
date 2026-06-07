@@ -5,6 +5,8 @@
 
 #define MAX_PRODUCTS 100
 
+/*sructure*/
+
 struct PriceProduct
 {
     int id;
